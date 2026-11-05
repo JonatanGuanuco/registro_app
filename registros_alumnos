@@ -1,0 +1,94 @@
+class Alumno {
+  final String nombre;
+  final String apellido;
+  final int edad;
+  final List<double> notas;
+
+  Alumno({
+    required this.nombre,
+    required this.apellido,
+    required this.edad,
+    required this.notas,
+  });
+
+  double calcularPromedio() {
+    double suma = 0;
+    for (double nota in notas) {
+      suma += nota;
+    }
+    return suma / notas.length;
+  }
+
+  String estadoFinal() {
+    double promedio = calcularPromedio();
+    if (promedio >= 6) {
+      return 'Aprobado';
+    } else if (promedio >= 4) {
+      return 'Recuperatorio';
+    } else {
+      return 'Desaprobado';
+    }
+  }
+
+  @override
+  String toString() {
+    return '$nombre $apellido — ${estadoFinal()}';
+  }
+}
+
+void main() {
+  var alumnos = [
+    Alumno(nombre: 'Sofía', apellido: 'Gómez', edad: 17, notas: [8.5, 9.0, 7.5]),
+    Alumno(nombre: 'Lucas', apellido: 'Pérez', edad: 16, notas: [4.0, 5.0, 6.0]),
+    Alumno(nombre: 'Ana', apellido: 'Martínez', edad: 18, notas: [3.0, 4.0, 2.5]),
+    Alumno(nombre: 'Tomás', apellido: 'Ruiz', edad: 17, notas: [6.0, 7.0, 6.5]),
+    Alumno(nombre: 'Valentina', apellido: 'López', edad: 16, notas: [9.0, 10.0, 8.5]),
+  ];
+
+  print('--- Estado de cada alumno ---');
+  for (Alumno a in alumnos) {
+    print(a);
+  }
+
+  Alumno mejor = alumnos.first;
+  for (Alumno a in alumnos) {
+    if (a.calcularPromedio() > mejor.calcularPromedio()) {
+      mejor = a;
+    }
+  }
+  print('Mejor promedio: ${mejor.nombre} ${mejor.apellido} (${mejor.calcularPromedio().toStringAsFixed(2)})');
+
+  int aprobados = 0;
+  int desaprobados = 0;
+  for (Alumno a in alumnos) {
+    if (a.estadoFinal() == 'Aprobado') {
+      aprobados++;
+    }
+    if (a.estadoFinal() == 'Desaprobado') {
+      desaprobados++;
+    }
+  }
+  print('Aprobados: $aprobados — Desaprobados: $desaprobados');
+
+  alumnos.sort((a, b) => b.calcularPromedio().compareTo(a.calcularPromedio()));
+  print('--- Ordenados por promedio (mayor a menor) ---');
+  alumnos.forEach((a) => print(a));
+}
+${mejor.apellido} (${mejor.calcularPromedio().toStringAsFixed(2)})');
+
+  int aprobados = 0;
+  int desaprobados = 0;
+  for (Alumno a in alumnos) {
+    if (a.estadoFinal() == 'Aprobado') {
+      aprobados++;
+    }
+    if (a.estadoFinal() == 'Desaprobado') {
+      desaprobados++;
+    }
+  }
+  print('Aprobados: $aprobados — Desaprobados: $desaprobados');
+
+  alumnos.sort((a, b) => b.calcularPromedio().compareTo(a.calcularPromedio()));
+  print('--- Ordenados por promedio (mayor a menor) ---');
+  alumnos.forEach((a) => print(a));
+}
